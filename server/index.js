@@ -21,6 +21,7 @@ app.use(morgan('dev'));
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/moods', require('./routes/moods'));
 
 // Root route
 app.get('/', (req, res) => {
