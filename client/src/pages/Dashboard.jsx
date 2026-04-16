@@ -3,12 +3,14 @@ import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 import MoodForm from '../components/MoodForm';
 import MoodStats from '../components/MoodStats';
-import { Sparkles, AlertCircle, Info } from 'lucide-react';
+import Chatbot from '../components/Chatbot';
+import { Sparkles, AlertCircle, Info, MessageCircle } from 'lucide-react';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [moodLogs, setMoodLogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showChat, setShowChat] = useState(false);
 
   const fetchMoodLogs = async () => {
     try {
@@ -115,6 +117,15 @@ const Dashboard = () => {
           </div>
         ) : renderContent()}
       </main>
+
+      <button 
+        onClick={() => setShowChat(!showChat)}
+        style={styles.chatToggle}
+      >
+        <MessageCircle size={24} />
+      </button>
+
+      {showChat && <Chatbot onClose={() => setShowChat(false)} />}
     </div>
   );
 };
@@ -184,6 +195,21 @@ const styles = {
     fontWeight: '700',
     color: '#b91c1c',
     fontSize: '15px',
+  },
+  chatToggle: {
+    position: 'fixed',
+    bottom: '40px',
+    right: '40px',
+    width: '60px',
+    height: '60px',
+    borderRadius: '30px',
+    backgroundColor: 'var(--primary)',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: 'var(--shadow-lg)',
+    zIndex: 999,
   }
 };
 
