@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Auth from './pages/Auth';
+import Dashboard from './pages/Dashboard';
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -23,16 +24,7 @@ function AppContent() {
             path="/dashboard" 
             element={
               <PrivateRoute>
-                <div className="fade-in" style={{ padding: '40px', textAlign: 'center' }}>
-                  <h1>NeuroTrack Dashboard</h1>
-                  <p>Welcome back, {user?.name}!</p>
-                  <button 
-                    onClick={() => { localStorage.clear(); window.location.reload(); }}
-                    style={{ marginTop: '20px', padding: '10px 20px', backgroundColor: 'var(--primary)', color: 'white' }}
-                  >
-                    Logout (Temp)
-                  </button>
-                </div>
+                <Dashboard />
               </PrivateRoute>
             } 
           />
